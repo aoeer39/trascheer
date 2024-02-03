@@ -27,7 +27,7 @@ translation = pipeline('translation_xx_to_yy', model = model, tokenizer = tokeni
 
 print('loaded model!')
 
-with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
+with open('lost.csv', newline = '', encoding = 'utf-8') as csvfile:
     spamreader = csv.DictReader(csvfile)
     for row in tqdm(spamreader):
         try:
