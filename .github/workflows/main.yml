@@ -19,3 +19,6 @@ jobs:
           path: |
             stare.txt
             output.csv
+            contentPro.list
+            contentPro.typ
+            contentPro.wikitext
