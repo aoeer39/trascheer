@@ -25,7 +25,7 @@ with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
             response = requests.get(row['Link'], headers = headers)
             cyberdescription = re3.sub(re3n, re1.search(response.text).group(1).replace("<p>", "").replace("</p>", "").replace("<ul>", "").replace("</ul>", "").replace("  <li>", "- ").replace("</li>", "").replace("  ", ""))
             description = cyberdescription.replace("<b>", "*").replace("</b>", "*").replace("<i>", "_").replace("</i>", "_")
-            contentPro += f'== {row["Value"]} \n  {description}} \n'
+            contentPro += f'== {row["Value"]} \n  {description} \n'
         except Exception as e:
             print(f'Fetch {row["Mission name"]} error with {e}!')
         images = (re.findall(re2, response.text))
