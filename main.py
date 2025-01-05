@@ -51,7 +51,6 @@ with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
                     print(f'Unable to insert {image[0]}.{image[1]}!', file = open('stare.txt', 'a'))
             except Exception as e:
                 print(f'Unable to insert {image[0]}.{image[1]} with error {e}!')
-        break # test!
 
 print(descriptions, file = open('contentPro.list', 'w'))
 print(contentPro, file = open('contentPro.typ', 'a'))
