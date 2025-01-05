@@ -30,6 +30,15 @@ print('loaded model!')
 with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
     spamreader = csv.DictReader(csvfile)
     for row in tqdm(spamreader):
+
+
+        response = requests.get(row['Link'], headers = headers)
+        cyberdescription = re3.sub(re3n, re1.search(response.text).group(1).replace("<p>", "").replace("</p>", "").replace("<ul>", "").replace("</ul>", "").replace("  <li>", "- ").replace("</li>", "").replace("  ", ""))
+        description = cyberdescription.replace("<b>", "*").replace("</b>", "*").replace("<i>", "_").replace("</i>", "_")
+        contentPro += f'== {row["Value"]} \n === 原文 === \n {description} \n === 中文翻译 \n {translation(description)[0]["translation_text"]} \n'
+
+
+        """
         try:
             response = requests.get(row['Link'], headers = headers)
             cyberdescription = re3.sub(re3n, re1.search(response.text).group(1).replace("<p>", "").replace("</p>", "").replace("<ul>", "").replace("</ul>", "").replace("  <li>", "- ").replace("</li>", "").replace("  ", ""))
@@ -37,6 +46,9 @@ with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
             contentPro += f'== {row["Value"]} \n === 原文 === \n {description} \n === 中文翻译 \n {translation(description)[0]["translation_text"]} \n'
         except Exception as e:
             print(f'Fetch {row["Mission name"]} error with {e}!')
+        """
+
+
         images = (re.findall(re2, response.text))
         for image in images:
             image_url = f'https://www.nanosats.eu/img/sat/{image[0]}.{image[1]}'
