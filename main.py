@@ -3,7 +3,6 @@ import filetype
 import re
 import requests
 from tqdm import tqdm
-from transformers import pipeline, AutoModelWithLMHead, AutoTokenizer
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -19,14 +18,6 @@ descriptions = []
 
 contentPro = ''
 
-print('loading model...')
-
-model = AutoModelWithLMHead.from_pretrained('Helsinki-NLP/opus-mt-en-zh')
-tokenizer = AutoTokenizer.from_pretrained('Helsinki-NLP/opus-mt-en-zh')
-translation = pipeline('translation_xx_to_yy', model = model, tokenizer = tokenizer)
-
-print('loaded model!')
-
 with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
     spamreader = csv.DictReader(csvfile)
     for row in tqdm(spamreader):
@@ -34,7 +25,7 @@ with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
             response = requests.get(row['Link'], headers = headers)
             cyberdescription = re3.sub(re3n, re1.search(response.text).group(1).replace("<p>", "").replace("</p>", "").replace("<ul>", "").replace("</ul>", "").replace("  <li>", "- ").replace("</li>", "").replace("  ", ""))
             description = cyberdescription.replace("<b>", "*").replace("</b>", "*").replace("<i>", "_").replace("</i>", "_")
-            contentPro += f'== {row["Value"]} \n === 原文 === \n {description} \n === 中文翻译 \n {translation(description)[0]["translation_text"]} \n'
+            contentPro += f'== {row["Value"]} \n  {description}} \n'
         except Exception as e:
             print(f'Fetch {row["Mission name"]} error with {e}!')
         images = (re.findall(re2, response.text))
