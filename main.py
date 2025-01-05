@@ -36,7 +36,7 @@ with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
             description = cyberdescription.replace("<b>", "*").replace("</b>", "*").replace("<i>", "_").replace("</i>", "_")
             contentPro += f'== {row["Value"]} \n === 原文 === \n {description} \n === 中文翻译 \n {translation(description)[0]["translation_text"]} \n'
         except Exception as e:
-            print(f'Fetch {row["Mission name"]} error with {e}!', file = open('stare.txt', 'a'))
+            print(f'Fetch {row["Mission name"]} error with {e}!')
         images = (re.findall(re2, response.text))
         for image in images:
             image_url = f'https://www.nanosats.eu/img/sat/{image[0]}.{image[1]}'
@@ -50,7 +50,8 @@ with open('data.csv', newline = '', encoding = 'utf-8') as csvfile:
                 else:
                     print(f'Unable to insert {image[0]}.{image[1]}!', file = open('stare.txt', 'a'))
             except Exception as e:
-                print(f'Unable to insert {image[0]}.{image[1]} with error {e}!', file = open('stare.txt', 'a'))
+                print(f'Unable to insert {image[0]}.{image[1]} with error {e}!')
+        break # test!
 
 print(descriptions, file = open('contentPro.list', 'w'))
 print(contentPro, file = open('contentPro.typ', 'a'))
