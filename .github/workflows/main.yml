@@ -19,4 +19,3 @@ jobs:
           path: |
             stare.txt
             output.csv
-            images/
